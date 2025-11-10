@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UNODC Drug Seizures - Professional Analysis 2024</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Lora:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
   
@@ -24,6 +25,69 @@
       max-width: 1600px;
       margin: 0 auto;
       background: #faf7f2;
+  }
+  
+  /* PDF DOWNLOAD BUTTON */
+  .pdf-download-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, #8b7355, #a89176);
+      color: #faf7f2;
+      padding: 18px 35px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(139, 115, 85, 0.4);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+  }
+  
+  .pdf-download-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(139, 115, 85, 0.6);
+      background: linear-gradient(135deg, #a89176, #8b7355);
+  }
+  
+  .pdf-download-btn:active {
+      transform: translateY(0);
+  }
+  
+  .pdf-download-btn .icon {
+      font-size: 20px;
+  }
+  
+  .pdf-download-btn.loading {
+      pointer-events: none;
+      opacity: 0.7;
+  }
+  
+  .pdf-download-btn.loading .btn-text {
+      display: none;
+  }
+  
+  .pdf-download-btn.loading::after {
+      content: 'PDF Hazırlanıyor...';
+      animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+  }
+  
+  /* Hide button in PDF */
+  @media print {
+      .pdf-download-btn {
+          display: none !important;
+      }
   }
   
   /* HEADER */
@@ -100,7 +164,6 @@
       letter-spacing: 1px;
   }
   
-  /* AUTHOR BOX - NEW */
   .author-box {
       position: absolute;
       top: 50px;
@@ -173,7 +236,6 @@
       letter-spacing: 1px;
   }
   
-  /* CONTENT */
   .content {
       padding: 60px 70px;
   }
@@ -212,7 +274,6 @@
       letter-spacing: 0.5px;
   }
   
-  /* MAIN DRUG CARDS */
   .drug-cards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -287,7 +348,6 @@
       color: #3d3428;
   }
   
-  /* PIE CHART */
   .chart-section {
       background: #ffffff;
       padding: 40px;
@@ -386,7 +446,6 @@
       font-weight: 600;
   }
   
-  /* BAR CHART */
   .bar-chart-section {
       background: #ffffff;
       padding: 40px;
@@ -444,7 +503,6 @@
   .bar-fill.africa { background: linear-gradient(90deg, #5d6b7c, #6d7b8c); }
   .bar-fill.middle-east { background: linear-gradient(90deg, #8b7355, #9b8365); }
   
-  /* DATA TABLE */
   .data-table-section {
       background: #ffffff;
       padding: 40px;
@@ -498,7 +556,6 @@
       color: #5a4a3a;
   }
   
-  /* STATISTICS GRID */
   .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -545,7 +602,6 @@
       line-height: 1.4;
   }
   
-  /* ANALYSIS BOX */
   .analysis-box {
       background: linear-gradient(135deg, #f4ede4, #e8dcc8);
       padding: 40px;
@@ -591,7 +647,6 @@
       text-align: justify;
   }
   
-  /* FOOTER */
   .footer {
       background: linear-gradient(135deg, #3d3428 0%, #5a4a3a 50%, #6b5d4f 100%);
       padding: 50px 70px;
@@ -642,7 +697,6 @@
       font-size: 14px;
   }
   
-  /* FOOTER AUTHOR BOX - NEW */
   .footer-author-box {
       background: linear-gradient(135deg, rgba(232,220,200,0.15), rgba(212,196,168,0.2));
       padding: 30px;
@@ -692,7 +746,14 @@
 </style>
 </head>
 <body>
-<div class="poster-container">
+
+<!-- PDF DOWNLOAD BUTTON -->
+<button class="pdf-download-btn" onclick="downloadPDF()">
+  <span class="icon">📄</span>
+  <span class="btn-text">PDF İndir</span>
+</button>
+
+<div class="poster-container" id="pdf-content">
   <!-- HEADER -->
   <div class="header">
       <div class="header-top">
@@ -703,7 +764,6 @@
           <div class="header-date">2024 Comprehensive Report</div>
       </div>
       
-      <!-- AUTHOR BOX IN HEADER -->
       <div class="author-box">
           <div class="author-label">Hazırlayan</div>
           <div class="author-name">Dr. Nurcan Denli Bayır</div>
@@ -737,7 +797,6 @@
   
   <!-- MAIN CONTENT -->
   <div class="content">
-      <!-- DRUG TYPES -->
       <div class="section">
           <div class="section-header">
               <div class="section-icon">01</div>
@@ -903,7 +962,6 @@
           </div>
       </div>
       
-      <!-- PIE CHART -->
       <div class="section">
           <div class="chart-section">
               <h3 class="chart-title">Küresel Ele Geçirme Dağılımı - Madde Türleri</h3>
@@ -950,7 +1008,6 @@
           </div>
       </div>
       
-      <!-- REGIONAL BAR CHART -->
       <div class="section">
           <div class="section-header">
               <div class="section-icon">02</div>
@@ -1000,7 +1057,6 @@
           </div>
       </div>
       
-      <!-- DATA TABLE -->
       <div class="section">
           <div class="section-header">
               <div class="section-icon">03</div>
@@ -1081,7 +1137,6 @@
           </div>
       </div>
       
-      <!-- STATISTICS GRID -->
       <div class="section">
           <div class="section-header">
               <div class="section-icon">04</div>
@@ -1139,7 +1194,6 @@
           </div>
       </div>
       
-      <!-- ANALYSIS -->
       <div class="section">
           <div class="section-header">
               <div class="section-icon">05</div>
@@ -1207,7 +1261,6 @@
           </div>
       </div>
       
-      <!-- FOOTER AUTHOR BOX -->
       <div class="footer-author-box">
           <div class="footer-author-label">Bu Çalışmayı Hazırlayan</div>
           <div class="footer-author-name">Dr. Nurcan Denli Bayır</div>
@@ -1219,5 +1272,35 @@
       </div>
   </div>
 </div>
+
+<script>
+function downloadPDF() {
+  const button = document.querySelector('.pdf-download-btn');
+  button.classList.add('loading');
+  
+  const element = document.getElementById('pdf-content');
+  const opt = {
+      margin: 0,
+      filename: 'UNODC_Drug_Seizures_Report_2024.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { 
+          scale: 2,
+          useCORS: true,
+          letterRendering: true
+      },
+      jsPDF: { 
+          unit: 'mm', 
+          format: 'a4', 
+          orientation: 'portrait' 
+      },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  };
+  
+  html2pdf().set(opt).from(element).save().then(() => {
+      button.classList.remove('loading');
+  });
+}
+</script>
+
 </body>
 </html>
