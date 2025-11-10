@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UNODC Drug Seizures - Professional Analysis 2024</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Lora:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
   
@@ -56,37 +55,64 @@
       background: linear-gradient(135deg, #a89176, #8b7355);
   }
   
-  .pdf-download-btn:active {
-      transform: translateY(0);
-  }
-  
   .pdf-download-btn .icon {
       font-size: 20px;
   }
   
-  .pdf-download-btn.loading {
-      pointer-events: none;
-      opacity: 0.7;
-  }
-  
-  .pdf-download-btn.loading .btn-text {
-      display: none;
-  }
-  
-  .pdf-download-btn.loading::after {
-      content: 'PDF Hazırlanıyor...';
-      animation: pulse 1.5s ease-in-out infinite;
-  }
-  
-  @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-  }
-  
-  /* Hide button in PDF */
+  /* PRINT STYLES */
   @media print {
+      body {
+          background: white;
+          margin: 0;
+          padding: 0;
+      }
+      
+      .poster-container {
+          max-width: 100%;
+          background: white;
+      }
+      
       .pdf-download-btn {
           display: none !important;
+      }
+      
+      .header {
+          background: #5a4a3a !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          page-break-after: avoid;
+      }
+      
+      .section {
+          page-break-inside: avoid;
+      }
+      
+      .drug-cards-grid {
+          page-break-inside: avoid;
+      }
+      
+      .chart-section {
+          page-break-inside: avoid;
+      }
+      
+      .bar-chart-section {
+          page-break-inside: avoid;
+      }
+      
+      .data-table-section {
+          page-break-before: always;
+      }
+      
+      .footer {
+          background: #3d3428 !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          page-break-before: avoid;
+      }
+      
+      * {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
       }
   }
   
@@ -748,12 +774,12 @@
 <body>
 
 <!-- PDF DOWNLOAD BUTTON -->
-<button class="pdf-download-btn" onclick="downloadPDF()">
+<button class="pdf-download-btn" onclick="window.print()">
   <span class="icon">📄</span>
-  <span class="btn-text">PDF İndir</span>
+  <span>PDF İndir (Ctrl+P)</span>
 </button>
 
-<div class="poster-container" id="pdf-content">
+<div class="poster-container">
   <!-- HEADER -->
   <div class="header">
       <div class="header-top">
@@ -1205,32 +1231,32 @@
               <div class="analysis-content">
                   <div class="analysis-item">
                       <h4>Cannabis Dominansı</h4>
-                      <p>Küresel ele geçirmelerin %60'ını oluşturan cannabis, hem yaygın kullanımı hem de hacimsel büyüklüğü nedeniyle istatistiksel olarak baskındır. Kuzey Amerika'da yasallaşma süreçleri yasadışı pazarı etkilemekte, ancak sınır ötesi ticaret devam etmektedir. Fas ve Afganistan ana üretim merkezleri olarak öne çıkmaktadır.</p>
+                      <p>Küresel ele geçirmelerin %60'ını oluşturan cannabis, hem yaygın kullanımı hem de hacimsel büyüklüğü nedeniyle istatistiksel olarak baskındır. Kuzey Amerika'da yasallaşma süreçleri yasadışı pazarı etkilemekte, ancak sınır ötesi ticaret devam etmektedir.</p>
                   </div>
                   
                   <div class="analysis-item">
                       <h4>Kokain Üretim Rekoru</h4>
-                      <p>Son 5 yılda %45'lik üretim artışı ile kokain ele geçirmeleri rekor seviyelere ulaşmıştır. Kolombiya, Peru ve Bolivya'da koka ekili alanların genişlemesi, Avrupa pazarına yönelik sevkiyatları artırmıştır. Rotterdam ve Antwerp limanları ana giriş noktaları haline gelmiştir.</p>
+                      <p>Son 5 yılda %45'lik üretim artışı ile kokain ele geçirmeleri rekor seviyelere ulaşmıştır. Kolombiya, Peru ve Bolivya'da koka ekili alanların genişlemesi, Avrupa pazarına yönelik sevkiyatları artırmıştır.</p>
                   </div>
                   
                   <div class="analysis-item">
                       <h4>Opioid Krizi ve Fentanil</h4>
-                      <p>Afganistan'da Taliban yönetimi altında afyon üretimi %20 azalmış olsa da, sentetik opioidler (özellikle fentanil) Kuzey Amerika'da büyük bir halk sağlığı krizi yaratmaktadır. Mikrogram düzeyinde etkili olan fentanil, ele geçirme istatistiklerinde ağırlık-etki paradoksuna yol açmaktadır.</p>
+                      <p>Afganistan'da Taliban yönetimi altında afyon üretimi %20 azalmış olsa da, sentetik opioidler (özellikle fentanil) Kuzey Amerika'da büyük bir halk sağlığı krizi yaratmaktadır.</p>
                   </div>
                   
                   <div class="analysis-item">
                       <h4>Asya-Pasifik'te ATS Artışı</h4>
-                      <p>Metamfetamin ele geçirmeleri Asya-Pasifik bölgesinde son 5 yılda %180 artış göstermiştir. Myanmar, Altın Üçgen bölgesinde ana üretim merkezi konumundadır. Sentetik üretim teknolojilerinin yaygınlaşması, prekursor kontrollerini zorlaştırmaktadır.</p>
+                      <p>Metamfetamin ele geçirmeleri Asya-Pasifik bölgesinde son 5 yılda %180 artış göstermiştir. Myanmar, Altın Üçgen bölgesinde ana üretim merkezi konumundadır.</p>
                   </div>
                   
                   <div class="analysis-item">
                       <h4>Yeni Psikoaktif Maddeler (NPS)</h4>
-                      <p>Sentetik kannabinoidler ve yeni psikoaktif maddeler %65 artış göstererek hızla çeşitlenmektedir. Kimyasal yapı modifikasyonları yasal kontrolleri aşmayı amaçlamaktadır. Dark web ve kripto para kullanımı, küçük hacimli yüksek değerli sevkiyatları kolaylaştırmaktadır.</p>
+                      <p>Sentetik kannabinoidler ve yeni psikoaktif maddeler %65 artış göstererek hızla çeşitlenmektedir. Kimyasal yapı modifikasyonları yasal kontrolleri aşmayı amaçlamaktadır.</p>
                   </div>
                   
                   <div class="analysis-item">
                       <h4>Afrika'da Tramadol Sorunu</h4>
-                      <p>Reçeteli ilaç kategorisinde tramadol ele geçirmeleri Afrika'da %220 artış göstermiştir. Batı ve Kuzey Afrika ülkelerinde yasadışı tramadol kullanımı önemli bir halk sağlığı sorunu haline gelmiştir. Hindistan ve Çin ana üretici ülkeler olarak tespit edilmiştir.</p>
+                      <p>Reçeteli ilaç kategorisinde tramadol ele geçirmeleri Afrika'da %220 artış göstermiştir. Batı ve Kuzey Afrika ülkelerinde yasadışı tramadol kullanımı önemli bir halk sağlığı sorunu haline gelmiştir.</p>
                   </div>
               </div>
           </div>
@@ -1244,7 +1270,6 @@
               <h3>Veri Kaynakları ve Metodoloji</h3>
               <p>Bu akademik analiz, UNODC (United Nations Office on Drugs and Crime) 2024 World Drug Report verilerine dayanmaktadır. Veriler 195 ülkeden toplanan resmi kolluk raporları, laboratuvar analizleri ve saha araştırmalarından derlenmiştir.</p>
               <p>Ele geçirme verileri, gerçek ticaret hacminin sadece tespit edilen kısmını yansıtmaktadır. UNODC tahminlerine göre ele geçirme oranı madde türüne göre %10-42 arasında değişmektedir.</p>
-              <p>İstatistiksel analiz, kolluk kapasitesi, coğrafi faktörler ve raporlama standartlarındaki farklılıkları dikkate almaktadır.</p>
           </div>
           
           <div class="footer-section">
@@ -1272,35 +1297,6 @@
       </div>
   </div>
 </div>
-
-<script>
-function downloadPDF() {
-  const button = document.querySelector('.pdf-download-btn');
-  button.classList.add('loading');
-  
-  const element = document.getElementById('pdf-content');
-  const opt = {
-      margin: 0,
-      filename: 'UNODC_Drug_Seizures_Report_2024.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { 
-          scale: 2,
-          useCORS: true,
-          letterRendering: true
-      },
-      jsPDF: { 
-          unit: 'mm', 
-          format: 'a4', 
-          orientation: 'portrait' 
-      },
-      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-  };
-  
-  html2pdf().set(opt).from(element).save().then(() => {
-      button.classList.remove('loading');
-  });
-}
-</script>
 
 </body>
 </html>
